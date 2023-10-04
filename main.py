@@ -88,4 +88,26 @@ def get_average_sales_heatmap():
               )
   plt.title(f"Average Sales Month vs Day of Week {START_DATE} - {END_DATE} // {STORE_NAME}", fontsize=20, fontdict=dict(weight="bold"))
   plt.savefig(f"{STORE_NAME}'s Weekday by Month between {START_DATE} - {END_DATE}.png")
+
+  df["day"] = df.index.day
+  
+  heatmap_data = pd.DataFrame(df.
+                              groupby(["day", df.index.month_name()])
+                              .Sales
+                              .mean()
+                              .unstack()
+                              )
+  
+  heatmap_data = heatmap_data[[calendar.month_name[i] for i in df.index.month.unique()]]
+  plt.figure(figsize=(12,12))
+  sns.heatmap(heatmap_data,
+              annot=True,
+              #vmin = df.Sales.min(),
+              #vmax = 30000,
+              cmap=cmap,
+              fmt="g"
+              )
+  plt.title(f"Average Sales Day vs Month {START_DATE} - {END_DATE} // {STORE_NAME}", fontsize=20, fontdict=dict(weight="bold"))
+  plt.savefig(f"{STORE_NAME}'s Month by day.png")
+
   return None
