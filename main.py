@@ -88,4 +88,4 @@ def get_average_sales_heatmap():
               )
   plt.title(f"Average Sales Month vs Day of Week {START_DATE} - {END_DATE} // {STORE_NAME}", fontsize=20, fontdict=dict(weight="bold"))
   plt.savefig(f"{STORE_NAME}'s Weekday by Month between {START_DATE} - {END_DATE}.png")
-return None
+  return None
